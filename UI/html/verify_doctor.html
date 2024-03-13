@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="verify_patient.css">
+</head>
+<body>
+    <div id="feature-top">
+        <h2>Retrieve Doctor Details</h2>
+    </div>
+    <div class="form-container">
+        <form id="retrieveForm">
+            <label for="doctorIdRetrieve">Doctor ID:</label>
+            <input type="number" id="doctorIdRetrieve" name="doctorIdRetrieve" required><br>
+            <input type="submit" value="Get details">
+        </form>
+        <div id="retrieveResult">
+            <div class="detail">
+                <label>Doctor Name:</label>
+                <div id="name"></div>
+            </div>
+            <div class="detail">
+                <label>Doctor Specification:</label>
+                <div id="spec"></div>
+            </div>
+            <div class="detail">
+                <label>Phone No:</label>
+                <div id="phno"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+<script src="verify_doctor.js"></script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details Form</title>
+    <link rel="stylesheet" href="verify_patient.css">
+</head>
+<body>
+    <div id="feature-top">
+        <h3>View Medical Records</h3>
+    </div>
+    <div class="form-container">
+        <form id="viewRecord">
+            <label for="patientId">Enter Patient Id:</label>
+            <input type="text" id="patientId" name="patientId" required><br>
+            <label for="recordId">Enter Record Id:</label>
+            <input type="text" id="recordId" name="recordId"><br>
+            <input type="submit" value="Get details">
+        </form>
+        <div id="viewResult"></div>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+    <script src="verify_medical.js"></script>

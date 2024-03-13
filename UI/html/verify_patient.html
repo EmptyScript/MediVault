@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details Form</title>
+    <link rel="stylesheet" href="verify_patient.css">
+</head>
+<body>
+    <div id="feature-top">
+        <h3>View Patient Details</h3>
+    </div>
+    <div class="form-container">
+        <label for="tid">Enter Patient ID:</label>
+        <input type="text" id="tid" name="tid">
+        <input type="button" onclick="show_details()" value="Get Details">
+        <div class="detail">
+            <label for="get_name">Patient Name:</label>
+            <div id="get_name"></div>
+        </div>
+        <div class="detail">
+            <label for="get_age">Age:</label>
+            <div id="get_age"></div>
+        </div>
+        <div class="detail">
+            <label for="get_gender">Gender:</label>
+            <div id="get_gender"></div>
+        </div>
+        <div class="detail">
+            <label for="get_address">Address:</label>
+            <div id="get_address"></div>
+        </div>
+        <div class="detail">
+            <label for="get_phone">Phone Number:</label>
+            <div id="get_phone"></div>
+        </div>
+        <div class="detail">
+            <label for="get_email">Email:</label>
+            <div id="get_email"></div>
+        </div>
+        <div class="detail">
+            <label for="get_date">Date:</label>
+            <div id="get_date"></div>
+        </div>
+        <div class="detail">
+            <label for="get_attendant">Attendant Name:</label>
+            <div id="get_attendant"></div>
+        </div>
+        <div class="detail">
+            <label for="get_relation">Relation:</label>
+            <div id="get_relation"></div>
+        </div>
+        <div class="detail">
+            <label for="get_attendant_phone">Attendant Phone Number:</label>
+            <div id="get_attendant_phone"></div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+<script src="verify_patient.js"></script>
+</html>

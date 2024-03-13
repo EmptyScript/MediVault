@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="hospital_registeration.css">
+</head>
+<body>
+    <div id="feature-top">
+        <h1>Create Patient Record</h1>
+    </div>
+    <div class="form-container">
+        <form id="createRecord">
+            <label for="patientId">Enter Patient Id:</label>
+            <input type="text" id="patientId" name="patientId" required><br>
+            <label for="recordId">Enter Record Id:</label>
+            <input type="text" id="recordId" name="recordId"><br>
+                <h2>Medical Condition</h2>
+            <label for="complaints">Complaints:</label>
+            <input type="text" id="complaints" name="complaints"><br>
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" name="duration"><br>
+                <h2>Treatment Summary</h2>
+            <label for="treatment">Treatment:</label>
+            <input type="text" id="treatment" name="treatment"><br>
+            <label for="date1">Date of Treatment:</label>
+            <input type="date" id="date1" name="date1"><br>
+            <label for="prescription">Prescription</label>
+            <input type="text" id="prescription" name="prescription"><br>
+            <label for="doctorId">Attending Doctor Id:</label>
+            <input type="text" id="doctorId" name="doctorId"><br>
+            <label for="hospitalId">Consulted Hospital Id:</label>
+            <input type="text" id="hospitalId" name="hospitalId"><br>
+            <label for="dischargeDate">Discharge Date:</label>
+            <input type="date" id="dischargeDate" name="dischargeDate"><br>
+            <label for="followup">Follow Up Date:</label>
+            <input type="date" id="followup" name="followup">
+            <button type="submit">Submit</button>
+    </form>
+    
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="medical_records.js" defer></script>
+</body>
+</html>

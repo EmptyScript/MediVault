@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="hospital_registeration.css">
+</head>
+<body>
+    <div id="feature-top">
+        <h1>Patient Registeration</h1>
+    </div>
+    <div class="form-container">
+        <form id="registerForm">
+            <label for="patientId">Patient ID:</label>
+            <input type="text" id="patientId" name="patientId" required>
+            <label for="patientName">Patient Name:</label>
+            <input type="text" id="patientName" name="patientName" required>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" required>
+            <label for="patientAddress">Address:</label>
+            <input type="text" id="patientAddress" name="patientAddress" required>
+            <label for="phoneNo">Phone Number:</label>
+            <input type="number" id="phoneNo" name="phoneNo" required>
+            <label for="emailId">Email ID:</label>
+            <input type="email" id="emailId" name="emailId" required>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <label for="attendantName">Attendant Name:</label>
+            <input type="text" id="attendantName" name="attendantName" required>
+            <label for="attendantRelation">Relation:</label>
+            <input type="text" id="attendantRelation" name="attendantRelation" required>
+            <label for="attendantPhnNo">Attendant Phone Number:</label>
+            <input type="text" id="attendantPhnNo" name="attendantPhnNo" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="patient_registeration.js" defer></script>
+</body>
+</html>

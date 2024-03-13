@@ -1,0 +1,363 @@
+.header-image-icon {
+  width: 100%;
+  height: 665px;
+  right: 0;
+  bottom: 139px;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.header-image-icon,
+.overlay-icon,
+.top-bar-icon {
+  position: absolute;
+  margin: 0 !important;
+}
+.top-bar-icon {
+  width: 1440px;
+  height: 98px;
+  top: 0;
+  left: -1px;
+}
+.overlay-icon {
+  width: 100%;
+  height: 665px;
+  top:168px;
+  right: 0;
+  left: 0;
+  object-fit: cover;
+}
+.logo-icon {
+  height: 63px;
+  width: 179px;
+  position: relative;
+  object-fit: cover;
+  z-index: 1;
+}
+.contact-us {
+  height: 45px;
+  width: 211px;
+  position: relative;
+  border-radius: 7px;
+  background-color: #017077b8;
+  display: none;
+}
+
+.contactus-text-icon {
+  width: 22px;
+  height: 23px;
+  position: relative;
+  z-index: 2;
+}
+.vector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1px 0 0;
+}
+.frame-p-a {
+  flex: 1;
+  position: relative;
+  font-size: 22px;
+  font-family: Montserrat;
+  color: #fff;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 2;
+}
+.frame-p-a-t-i-e-n-t-a-d-m-i-n,
+.l-o-g-o {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.l-o-g-o {
+  cursor: pointer;
+  border: 0;
+  padding: 11px 5px 10px 27px;
+  background-color: rgba(1, 112, 119, 0.72);
+  align-self: stretch;
+  border-radius: 7px;
+  flex-direction: row;
+  gap: 0 11px;
+  z-index: 1;
+}
+
+.l-o-g-o:hover{
+  transform: scale(1.1,1.1);
+}
+.frame-p-a-t-i-e-n-t-a-d-m-i-n {
+  width: 211px;
+  flex-direction: column;
+  padding: 0 0 6px;
+  box-sizing: border-box;
+}
+.navbar,
+.topbar {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+}
+.navbar {
+  width: 1257px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.topbar {
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.home {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: black ;
+}
+
+.frame-h-o-m-e {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 8px 16px 0 0;
+}
+
+.frame-h-o-m-e:hover{
+  transform: scale(1.1,1.1);
+}
+.patient {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: black;
+}
+
+.patient:hover{
+  transform: scale(1.1,1.1);
+}
+
+.frame-h-o-s-p-i-t-a-l {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 9px 4px 0 0;
+}
+.admin {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: black;
+}
+
+.admin:hover{
+  transform: scale(1.1,1.1);
+}
+.frame-h-o-s-p-i-t-a-l1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 9px 0 0;
+}
+
+.hospital {
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  color: black;
+}
+
+.frame-h-o-s-p-i-t-a-l2 {
+  width: 271px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 9px 0 0;
+  box-sizing: border-box;
+}
+.frame-h-o-s-p-i-t-a-l2:hover{
+  transform: scale(1.1,1.1);
+}
+.menu-icon {
+  height: 44px;
+  width: 44px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+
+.frame-a-d-m-i-n {
+  width: 1090px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 100%;
+}
+.header-image {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 32px 0;
+  top: 0;
+  z-index: 99;
+  position: sticky;
+  max-width: 100%;
+  text-align: left;
+  font-size: 22px;
+  color: #2c3e50;
+  font-family: Montserrat;
+}
+.navbar-icon {
+  width: 100%;
+  height: 68px;
+  position: absolute;
+  margin: 0 !important;
+  top: 100px;
+  right: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.transforming-healthcare {
+  margin: 0;
+}
+.blockchain {
+  color: #00fff0;
+}
+.text-1,
+.with-blockchain {
+  margin: 0;
+
+}
+.text-1 {
+  height: 104px;
+  position: relative;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  max-width: 100%;
+  z-index: 2;
+}
+.empowering-doctors-by {
+  margin: 0;
+  font-weight: 600;
+}
+.on {
+  font-weight: 600;
+}
+.ethereum-blockchain,
+.on {
+  font-family: Montserrat;
+}
+.span {
+  font-weight: 600;
+}
+.on-ethereum-blockchain {
+  margin: 0;
+}
+.and-hospitals,
+.seamless-collaboration-among {
+  margin: 0;
+  font-weight: 600;
+}
+.textmenu {
+  align-self: stretch;
+  position: relative;
+  font-size: 28px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+.frametext,
+.frametext-wrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.frametext {
+  width: 1018px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 48px 0;
+}
+.frametext-wrapper {
+  width: 1246px;
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+  font-size: 43px;
+  color: #fff;
+  font-family: Montserrat;
+}
+.footer {
+  width: 1440px;
+  height: 134px;
+  position: relative;
+  display: none;
+  max-width: 100%;
+  z-index: 6;
+
+}
+.homepage {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 17px 38px 332px 47px;
+  box-sizing: border-box;
+  gap: 190px 0;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 1350px) {
+  .frame-a-d-m-i-n {
+    display: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  .header-image {
+    gap: 16px 0;
+  }
+  .text-1 {
+    font-size: 34px;
+  }
+  .frametext {
+    gap: 24px 0;
+  }
+  .homepage {
+    gap: 95px 0;
+    padding-left: 23px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .text-1 {
+    font-size: 26px;
+  }
+  .textmenu {
+    font-size: 22px;
+  }
+  .homepage {
+    gap: 47px 0;
+  }
+}
+
+

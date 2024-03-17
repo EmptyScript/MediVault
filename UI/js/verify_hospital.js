@@ -12,135 +12,18 @@ window.addEventListener('load', async () => {
         console.error('Non-Ethereum browser detected. You should consider trying MetaMask!')
     }
 
-
-    const contractAddress = '0xf8AD3dcd6ce65cbff2feC6163fc9102316397ef9'; // Replace with your contract address
-    const contractABI = [
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "hospital_id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "string",
-                "name": "_hospital_name",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_hospital_address",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_hospital_spec",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_hospital_pass",
-                "type": "string"
-            }
-        ],
-        "name": "storeHospitalDetails",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "hospitalList",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "hospital_name",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "hospital_address",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "hospital_spec",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "hospital_pass",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "hospital_id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "string",
-                "name": "_hospital_pass",
-                "type": "string"
-            }
-        ],
-        "name": "hospitalLogin",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "hospital_id",
-                "type": "uint256"
-            }
-        ],
-        "name": "retrieveHospitalDetails",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
-    ];
+    const contractAddress = '0xd5E62eb3062A1c4A9117B98ad52296852df045e7'; // Replace with your contract address
+    
+    async function loadjson(){
+            const res = await fetch('../../build/contracts/Hospital.json');
+            const data = await res.json();
+            return data;
+        }
+        
+        async function initContract() {
+            try {
+                const ans = await loadjson();
+                const contractABI = ans.abi;
     const contract = new window.web3.eth.Contract(contractABI, contractAddress);
 
     
@@ -158,4 +41,10 @@ window.addEventListener('load', async () => {
         retrieveResultDiv.innerText = error.message;
     }
 });
+            }catch (error) {
+                console.error('Error initializing contract:', error);
+            }
+        }
+    
+        initContract(); // Initialize the contract
 });

@@ -12,75 +12,19 @@ window.addEventListener('load', async () => {
         console.error('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
 
-    const abi = [
-        {
-            "inputs": [],
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "patientId",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "recordId",
-                    "type": "uint256"
-                }
-            ],
-            "name": "getIllnessAndTreatment",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
+    const contractaddress = '0xEAFF697139c87944F9112A73cf9e6396a9F1785C'; // Replace with your contract address
+    
+    async function loadjson(){
+            const res = await fetch('../../build/contracts/MedicalRecords.json');
+            const data = await res.json();
+            return data;
         }
-    ];
-
-    const contractAddress = '0x17288f2B8D96c084369c20f99Aeece38c9A8814d'; // Corrected variable name
-    const contract = new web3.eth.Contract(abi, contractAddress);
+        
+        async function initContract() {
+            try {
+                const ans = await loadjson();
+                const abi = ans.abi;
+    const contract = new web3.eth.Contract(abi, contractaddress);
     const viewRecordForm = document.getElementById('viewRecord'); // Corrected variable name
     const viewResultDiv = document.getElementById('viewResult');
 
@@ -105,4 +49,10 @@ window.addEventListener('load', async () => {
             alert(error.message);
         }
     });
+} catch (error) {
+    console.error('Error initializing contract:', error);
+}
+}
+
+initContract(); // Initialize the contract
 });

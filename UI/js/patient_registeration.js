@@ -11,141 +11,19 @@ window.addEventListener('load', async () => {
     } else {
         console.error('Non-Ethereum browser detected. You should consider trying MetaMask!')
     }
-    const contractAddress = '0xA383b6E142cAcfEA05A1e1F75eC4185f2adC0a22'; // Replace with your contract address
-    const contractABI = [
-{
-"inputs": [],
-"stateMutability": "nonpayable",
-"type": "constructor"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "patient_id",
-    "type": "uint256"
-}
-],
-"name": "retreive_patient_details",
-"outputs": [
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-}
-],
-"stateMutability": "view",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "patient_id",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_patient_name",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_age",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_gender",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_patient_address",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_phone_no",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_email_id",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_date",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_attendant_name",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_attendant_relation",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_attendant_phn_no",
-    "type": "uint256"
-}
-],
-"name": "store_patient_details",
-"outputs": [],
-"stateMutability": "nonpayable",
-"type": "function"
-}
-];
+    const contractAddress = '0xe01df20602F4E242Df0ca02985875a29f62BBBA7'; // Replace with your contract address
+    
+    async function loadjson(){
+            const res = await fetch('../../build/contracts/Patient.json');
+            const data = await res.json();
+            return data;
+        }
+        
+        async function initContract() {
+            try {
+                const ans = await loadjson();
+                const contractABI = ans.abi;
+    
     const contract = new window.web3.eth.Contract(contractABI, contractAddress);
 
     const registerForm = document.getElementById('registerForm');
@@ -163,9 +41,37 @@ window.addEventListener('load', async () => {
         const attendantName = formData.get('attendantName');
         const attendantRelation = formData.get('attendantRelation');
         const attendantPhnNo = formData.get('attendantPhnNo');
+        if (!validateId(patientId)) {
+            alert("Please enter a valid Id");
+            return;
+        }
+        if (!validateName(patientName)) {
+            alert("Please enter between less than 15 characters");
+            return;
+        }
+        if (!validateAge(age)) {
+            alert("Please enter valid age");
+            return;
+        }
+        if (!validateGender(gender)) {
+            alert("Please enter in single character");
+            return;
+        }
+        if (!validateAddress(patientAddress)) {
+            alert("Please enter an address with more than 10 characters &  less than 30 characters");
+            return;
+        }
+        if (!validateMobile(phoneNo)) {
+            alert("Please enter a 10 digit number");
+            return;
+        }
+        if (!validateEmail(emailId)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
         try {
             // Call the appropriate contract method to register patient
-            await contract.methods.store_patient_details(patientId, patientName, age, gender, patientAddress, phoneNo, emailId, date, attendantName, attendantRelation, attendantPhnNo).send({ from: window.ethereum.selectedAddress , gas: 5000000, gasPrice : 50000000  });
+            await contract.methods.store_patient_details(patientId, patientName, age, gender, patientAddress, phoneNo, emailId, date).send({ from: window.ethereum.selectedAddress , gas: 5000000, gasPrice : 50000000  });
             alert(`Patient registered successfully!`);
             // Redirect to a new page or perform any other action upon successful registration
             window.location.href = "verify_patient.html";
@@ -173,4 +79,10 @@ window.addEventListener('load', async () => {
             alert(error.message);
         }
     });
+} catch (error) {
+    console.error('Error initializing contract:', error);
+}
+}
+
+initContract(); // Initialize the contract
 });

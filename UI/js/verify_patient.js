@@ -1,4 +1,5 @@
 var account;
+
 window.addEventListener('load', async () => {
     if (typeof window.ethereum !== 'undefined') { 
         console.log("MetaMask is Available :) !"); 
@@ -14,149 +15,33 @@ window.addEventListener('load', async () => {
     } else {
         console.log('Non-Ethereum browser detected. Please install MetaMask');
     }
+
+    initContract(); // Initialize the contract after checking Ethereum provider
 });
 
-var abi = [
-{
-"inputs": [],
-"stateMutability": "nonpayable",
-"type": "constructor"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "patient_id",
-    "type": "uint256"
-}
-],
-"name": "retreive_patient_details",
-"outputs": [
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-}
-],
-"stateMutability": "view",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "patient_id",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_patient_name",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_age",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_gender",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_patient_address",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_phone_no",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_email_id",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_date",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_attendant_name",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_attendant_relation",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_attendant_phn_no",
-    "type": "uint256"
-}
-],
-"name": "store_patient_details",
-"outputs": [],
-"stateMutability": "nonpayable",
-"type": "function"
-}
-]
-var contractaddress = '0xA383b6E142cAcfEA05A1e1F75eC4185f2adC0a22';
+const contractaddress = '0xe01df20602F4E242Df0ca02985875a29f62BBBA7'; // Replace with your contract address
 
-function show_details() {
-    var myContract = new web3.eth.Contract(abi, contractaddress, {from: account, gasPrice: '50000000000', gas: '500000'});
+async function loadjson(){
+    const res = await fetch('../../build/contracts/Patient.json');
+    const data = await res.json();
+    return data;
+}
+
+async function initContract() {
+    try {
+        const ans = await loadjson();
+        const abi = ans.abi;
+        const myContract = new web3.eth.Contract(abi, contractaddress, {from: account, gasPrice: '50000000000', gas: '500000'});
+        await show_details(myContract, abi); // Call show_details within initContract
+    } catch (error) {
+        console.error('Error initializing contract:', error);
+    }
+}
+
+async function show_details(myContract, abi) {
     var idd = document.getElementById("tid").value;
-    var result = myContract.methods.retreive_patient_details(idd).call(function (err, result) {
-        if (err) { console.log(err); }
+    try {
+        const result = await myContract.methods.retreive_patient_details(idd).call();
         if (result) { 
             document.getElementById("get_name").innerHTML = result[0];
             document.getElementById("get_age").innerHTML = result[1];
@@ -169,5 +54,9 @@ function show_details() {
             document.getElementById("get_relation").innerHTML = result[8];
             document.getElementById("get_attendant_phone").innerHTML = result[9];
         }
-    });
+    } catch (err) {
+        console.error(err);
+    }
 }
+
+

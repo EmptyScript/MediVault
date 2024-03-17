@@ -11,134 +11,20 @@ window.addEventListener('load', async () => {
     } else {
         console.error('Non-Ethereum browser detected. You should consider trying MetaMask!')
     }
-    const contractAddress = '0xa2045398786c82B31Ef3b67c647A954226760231'; // Insert contract address
-    const contractABI = [
-{
-"inputs": [],
-"stateMutability": "nonpayable",
-"type": "constructor"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-}
-],
-"name": "doctorList",
-"outputs": [
-{
-    "internalType": "string",
-    "name": "doctor_name",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "doctor_specialisation",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "doctor_ph_no",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "doctor_pass",
-    "type": "string"
-}
-],
-"stateMutability": "view",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint16",
-    "name": "doctor_id",
-    "type": "uint16"
-},
-{
-    "internalType": "string",
-    "name": "_doctor_pass",
-    "type": "string"
-}
-],
-"name": "doctorLogin",
-"outputs": [
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-}
-],
-"stateMutability": "view",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint16",
-    "name": "doctor_id",
-    "type": "uint16"
-}
-],
-"name": "retrieveDoctorDetails",
-"outputs": [
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-}
-],
-"stateMutability": "view",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint16",
-    "name": "doctor_id",
-    "type": "uint16"
-},
-{
-    "internalType": "string",
-    "name": "_doctor_name",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_doctor_specialisation",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_doctor_ph_no",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_doctor_pass",
-    "type": "string"
-}
-],
-"name": "storeDoctorDetails",
-"outputs": [],
-"stateMutability": "nonpayable",
-"type": "function"
-}
-]; // Insert contract ABI
+    const contractAddress = '0xBe4F1328DD6f55C8A68306A32a985250Cfcf8C94'; // Insert contract address
+    
+    async function loadjson(){
+            const res = await fetch('../../build/contracts/Doctor.json');
+            const data = await res.json();
+            return data;
+        }
+        
+        async function initContract() {
+            try {
+                const ans = await loadjson();
+                const contractABI = ans.abi;
+    
+
     const contract = new window.web3.eth.Contract(contractABI, contractAddress);
 
     const registerForm = document.getElementById('registerForm');
@@ -150,6 +36,28 @@ window.addEventListener('load', async () => {
         const doctorSpecialisation = formData.get('doctorSpecialisation');
         const doctorPhNo = formData.get('doctorPhNo');
         const doctorPass = formData.get('doctorPass');
+        if (!validateId(doctorId)) {
+            alert("Please enter a valid Id between 3 and 5 characters.");
+            return;
+        }
+
+        if (!validateName(doctorName)) {
+            alert("Please enter a password between 8 and 15 characters.");
+            return;
+        }
+        if (!validateMobile(doctorPhNo)) {
+            alert("Please enter a 10 digit number");
+            return;
+        }
+
+        if (!validateLength(doctorSpecialisation)) {
+            alert("Please enter in less than 20 characters.");
+            return;
+        }
+        if (!validatePassword(doctorPass)) {
+            alert("Please enter a password between 8 and 15 characters.");
+            return;
+        }
         try {
             await contract.methods.storeDoctorDetails(doctorId, doctorName, doctorSpecialisation, doctorPhNo, doctorPass).send({ from: window.ethereum.selectedAddress, gas: 5000000, gasPrice : 50000000 });
             alert(`Doctor registered successfully!`);
@@ -159,4 +67,10 @@ window.addEventListener('load', async () => {
             alert(error.message);
         }
     });
+}catch (error) {
+    console.error('Error initializing contract:', error);
+}
+}
+
+initContract(); // Initialize the contract
 });

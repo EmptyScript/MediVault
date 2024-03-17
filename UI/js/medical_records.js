@@ -11,175 +11,19 @@ window.addEventListener('load', async () => {
     } else {
         console.error('Non-Ethereum browser detected. You should consider trying MetaMask!')
     }
-var abi = [
-{
-"inputs": [],
-"stateMutability": "nonpayable",
-"type": "constructor"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "patientId",
-    "type": "uint256"
-},
-{
-    "internalType": "uint256",
-    "name": "recordId",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_complaints",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_duration",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_treatment",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_dateTreatment",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_prescription",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "_doctorId",
-    "type": "uint256"
-},
-{
-    "internalType": "uint256",
-    "name": "_hospitalId",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "_discharge",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "_followUp",
-    "type": "string"
-}
-],
-"name": "addIllnessAndTreatment",
-"outputs": [],
-"stateMutability": "nonpayable",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "patientId",
-    "type": "uint256"
-},
-{
-    "internalType": "uint256",
-    "name": "recordId",
-    "type": "uint256"
-}
-],
-"name": "getIllnessAndTreatment",
-"outputs": [
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-},
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-},
-{
-    "internalType": "string",
-    "name": "",
-    "type": "string"
-}
-],
-"stateMutability": "view",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "patientId",
-    "type": "uint256"
-}
-],
-"name": "getRecordIds",
-"outputs": [
-{
-    "internalType": "uint256[]",
-    "name": "",
-    "type": "uint256[]"
-}
-],
-"stateMutability": "view",
-"type": "function"
-},
-{
-"inputs": [
-{
-    "internalType": "uint256",
-    "name": "",
-    "type": "uint256"
-}
-],
-"name": "patients",
-"outputs": [
-{
-    "internalType": "uint256",
-    "name": "patientId",
-    "type": "uint256"
-}
-],
-"stateMutability": "view",
-"type": "function"
-}
-];
-var contractaddress = '0x17288f2B8D96c084369c20f99Aeece38c9A8814d';
 
+const contractaddress = '0xEAFF697139c87944F9112A73cf9e6396a9F1785C'; // Replace with your contract address
+    
+async function loadjson(){
+        const res = await fetch('../../build/contracts/MedicalRecords.json');
+        const data = await res.json();
+        return data;
+    }
+    
+    async function initContract() {
+        try {
+            const ans = await loadjson();
+            const abi = ans.abi;
 
     const contract = new web3.eth.Contract(abi, contractaddress);
     const registerForm = document.getElementById('createRecord');
@@ -197,13 +41,50 @@ var contractaddress = '0x17288f2B8D96c084369c20f99Aeece38c9A8814d';
         const hospitalId= formData.get('hospitalId');
         const date2 = formData.get('dischargeDate');
         const date3 = formData.get('followup');
+        if (!validateId(patientId)) {
+            alert("Please enter a valid Id between 3 and 5 characters.");
+            return;
+        }
+        if (!validateId(recordId)) {
+            alert("Please enter a valid Id between 3 and 5 characters.");
+            return;
+        }
+        if (!validateLength(complaints)) {
+            alert("Please enter in less than 20 characters.");
+            return;
+        }
+        if (!validateLength(duration)) {
+            alert("Please enter in less than 20 characters.");
+            return;
+        }
+        if (!validateLength(treatment)) {
+            alert("Please enter in less than 20 characters.");
+            return;
+        }
+        if (!validateLength(prescription)) {
+            alert("Please enter in less than 20 characters.");
+            return;
+        }
+        if (!validateId(doctorId)) {
+            alert("Please enter a valid Id between 3 and 5 characters.");
+            return;
+        }
+        if (!validateId(hospitalId)) {
+            alert("Please enter a valid Id between 3 and 5 characters.");
+            return;
+        }
         try {
             await contract.methods.addIllnessAndTreatment(patientId,recordId,complaints,duration,treatment,date1,prescription,doctorId,hospitalId,date2,date3).send({ from: window.ethereum.selectedAddress,  gas: 5000000, gasPrice : 50000000 });
             alert(`Record Created successfully!`);
-            window.location.href = "verify_records.html"
+            window.location.href = "verify_medical.html"
         } catch (error) {
             alert(error.message);
         }
     });
+}catch (error) {
+    console.error('Error initializing contract:', error);
+}
+}
+
+initContract(); // Initialize the contract
 });
-v

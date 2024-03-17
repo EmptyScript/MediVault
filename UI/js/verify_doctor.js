@@ -12,134 +12,19 @@ window.addEventListener('load', async () => {
         console.error('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
 
-    const contractAddress = '0xa2045398786c82B31Ef3b67c647A954226760231'; // Insert contract address
-    const contractABI = [
-        {
-            "inputs": [],
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "name": "doctorList",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "doctor_name",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "doctor_specialisation",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "doctor_ph_no",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "string",
-                    "name": "doctor_pass",
-                    "type": "string"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint16",
-                    "name": "doctor_id",
-                    "type": "uint16"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_doctor_pass",
-                    "type": "string"
-                }
-            ],
-            "name": "doctorLogin",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint16",
-                    "name": "doctor_id",
-                    "type": "uint16"
-                }
-            ],
-            "name": "retrieveDoctorDetails",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint16",
-                    "name": "doctor_id",
-                    "type": "uint16"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_doctor_name",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_doctor_specialisation",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_doctor_ph_no",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_doctor_pass",
-                    "type": "string"
-                }
-            ],
-            "name": "storeDoctorDetails",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
+    const contractAddress = '0xBe4F1328DD6f55C8A68306A32a985250Cfcf8C94'; // Insert contract address
+    
+    async function loadjson(){
+            const res = await fetch('../../build/contracts/Doctor.json');
+            const data = await res.json();
+            return data;
         }
-    ]; // Insert contract ABI
+        
+        async function initContract() {
+            try {
+                const ans = await loadjson();
+                const contractABI = ans.abi;
+    
     const contract = new window.web3.eth.Contract(contractABI, contractAddress);
     
     const retrieveForm = document.getElementById('retrieveForm');
@@ -156,4 +41,10 @@ window.addEventListener('load', async () => {
             retrieveResultDiv.innerText = error.message;
         }
     });
+} catch (error) {
+    console.error('Error initializing contract:', error);
+}
+}
+
+initContract(); // Initialize the contract
 });

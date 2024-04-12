@@ -1,7 +1,4 @@
-const Web3 = require('web3');
-const contractABI = require('Hospital.json'); // Load your contract's ABI from a JSON file
-const web3 = new Web3('http://localhost:7545'); // Connect to your Ganache instance
-const contractAddress = '0x123abc...'; 
+
 window.addEventListener('load', async () => {
     if (window.ethereum) {
         window.web3 = new Web3(window.ethereum);

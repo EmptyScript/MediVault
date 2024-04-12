@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Details Form</title>
+    <title>Retrieve Patient Details</title>
     <link rel="stylesheet" href="../css/verify_patient.css">
 </head>
 <body>
     <div id="feature-top">
-        <h3>View Patient Details</h3>
+        <h3>Retrieve Patient Details</h3>
     </div>
     <div class="form-container">
-        <label for="tid">Enter Patient ID:</label>
-        <input type="text" id="tid" name="tid">
-        <input type="button" onclick="show_details()" value="Get Details">
+        <form id="retrieveForm">
+            <label for="patientId">Enter Patient ID:</label>
+            <input type="text" id="patientId" name="patientId" required>
+            <input type="submit" value="Get Details">
+        </form>
         <div class="detail">
             <label for="get_name">Patient Name:</label>
             <div id="get_name"></div>
@@ -41,18 +43,6 @@
         <div class="detail">
             <label for="get_date">Date:</label>
             <div id="get_date"></div>
-        </div>
-        <div class="detail">
-            <label for="get_attendant">Attendant Name:</label>
-            <div id="get_attendant"></div>
-        </div>
-        <div class="detail">
-            <label for="get_relation">Relation:</label>
-            <div id="get_relation"></div>
-        </div>
-        <div class="detail">
-            <label for="get_attendant_phone">Attendant Phone Number:</label>
-            <div id="get_attendant_phone"></div>
         </div>
     </div>
 </body>
